@@ -1,0 +1,51 @@
+.footer-main{
+    background-color: $color-primary;
+    background: linear-gradient(90deg, $color-primary 0%, #f28f0f 100%);
+    padding: 50px 0;
+    .footer-container{
+        display: flex;
+        align-items: stretch;
+        column-gap: 2rem;
+        .col{
+            flex: 1;
+            &.col-logo{
+                display: flex;
+                align-items: center;
+                .logo{
+                    img{
+                        filter: brightness(0) invert(1);
+                        width: 200px;
+                    }
+                }
+            }
+            &.col-nav{
+                .nav{
+                    flex-direction: column;
+                    .nav-item{
+                        border-bottom: 1px dotted rgba(255,255,255,0.4);
+                    }
+                    .nav-link{
+                        color: #fff;
+                        padding: 0.5rem 0;
+                        font-weight: 600;
+                    }
+                }
+            }
+            &.col-contact{
+                color: #fff;
+                .address{
+                    margin-bottom: 1.5rem;
+                }
+                .contact{
+                    margin-bottom: 1.5rem;
+                }
+                .opening{
+                    .title{
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
