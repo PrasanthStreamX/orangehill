@@ -14,11 +14,11 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::where('email', 'safeeraslamc@gmail.com')->first();
+        $user = User::where('email', 'dev.streamx@gmail.com')->first();
         if (is_null($user)) {
             $user = new User();
             $user->name = "Administrator";
-            $user->email = "safeeraslamc@gmail.com";
+            $user->email = "dev.streamx@gmail.com";
             $user->username = 'superadmin';
             $user->password = Hash::make('abc@123');
             $user->email_verified_at = now();

@@ -5,6 +5,7 @@ namespace Modules\FoodMenu\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\FoodMenu\Models\FmMenu;
+use Modules\FoodMenu\Models\FmMenuCategory;
 use Modules\FoodMenu\Models\FmMenuType;
 
 class FEfoodMenuController extends Controller
@@ -16,10 +17,11 @@ class FEfoodMenuController extends Controller
     public function index()
     {
         $pageFace['page_title'] = 'Menu';
-        $types = FmMenuType::where('active',1)->get();
-        $menus = FmMenu::with('type','category','item')->get();
+        $types = FmMenuType::where('active',1)->where('in_menu',1)->orderBy('weight', 'asc')->get();
+        $categories = FmMenuCategory::where('active',1)->get();
+        $menus = FmMenu::with('item','type','category')->orderBy('weight', 'asc')->get();
         $menuGroups = FmMenu::with('type','category')->groupBy('category_id','type_id')->get();
-        return view('foodmenu::frontend.list',compact('pageFace','types','menus','menuGroups'));
+        return view('foodmenu::frontend.list',compact('pageFace','types', 'categories' ,'menus','menuGroups'));
     }
 
     /**

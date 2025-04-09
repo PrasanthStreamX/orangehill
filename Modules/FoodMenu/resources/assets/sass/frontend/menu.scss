@@ -129,8 +129,40 @@
                 }
             }
         }
+        &.list_package{
+            .list-section-title{
+                text-align: center;
+            }
+            .menu-list{
+                grid-template-columns: repeat(1, 1fr);
+                row-gap: 1rem;
+                .item-dflex{
+                    justify-content: center;
+                    .image{
+                        display: none;
+                    }
+                    .details{
+                        text-align: center;
+                        .title{
+                            align-items: center;
+                            justify-content: center;
+                            &::after{
+                                content: none;
+                            }
+                        }
+                        .price{
+                            display: none;
+                        }
+                        .description{
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
     &.tile{
         $img-size : 200px;
     }
+    
 }

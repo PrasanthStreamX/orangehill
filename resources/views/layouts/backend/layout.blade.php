@@ -11,10 +11,9 @@ $isFooter = ($isFooter ?? true);
 <div class="layout-wrapper">
     <div class="layout-container">
         @if ($isNavbar)
-            @include('layouts.backend.sections.navbar.navbar')
+            @include('layouts.backend.navbar.navbar')
         @endif
         <div class="content-wrapper">
-            
             @yield('content')
         </div>
         @if ($isFooter)

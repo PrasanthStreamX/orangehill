@@ -4,6 +4,7 @@ namespace Modules\FoodMenu\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FmMenuItem extends Model
@@ -23,6 +24,11 @@ class FmMenuItem extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function prices(): HasMany
+    {
+        return $this->hasMany(FmMenuItemPrice::class, 'item_id', 'id');
     }
     
 }

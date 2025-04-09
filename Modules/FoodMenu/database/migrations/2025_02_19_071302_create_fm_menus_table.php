@@ -18,9 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('item_id')->constrained();
             $table->integer('weight')->default(0);
             $table->boolean('active')->default(1);
-            $table->boolean('published')->default(0);
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('type_id')->references('id')->on('fm_menu_types');
             $table->foreign('category_id')->references('id')->on('fm_menu_categories');

@@ -15,12 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->enum('type', array('default', 'package', 'catering'))->default('default');
+            $table->decimal('price_full', 8, 2)->default(0);
+            $table->decimal('price_half', 8, 2)->default(0);
+            $table->integer('min_pack')->default(8);
             $table->text('info')->nullable();
             $table->text('description')->nullable();
             $table->text('note')->nullable();
             $table->string('thumb')->nullable();
             $table->string('cover_photo')->nullable();
             $table->integer('weight')->default(0);
+            $table->boolean('in_menu')->default(1);
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

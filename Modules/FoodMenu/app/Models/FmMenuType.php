@@ -11,7 +11,7 @@ class FmMenuType extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['title','slug','info','description','note','thumb','cover_photo','weight','active'];
+    protected $fillable = ['title','slug', 'type', 'price_full', 'price_half', 'min_pack', 'info','description','note','thumb','cover_photo','weight','in_menu','active'];
 
     public function sluggable(): array
     {

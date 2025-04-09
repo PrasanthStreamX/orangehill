@@ -4,18 +4,14 @@ namespace Modules\FoodMenu\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-// use Modules\FoodMenu\Database\Factories\FmMenuFactory;
 
 class FmMenu extends Model
 {
-    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['type_id','category_id','item_id', 'weight', 'active','published'];
+    protected $fillable = ['type_id','category_id','item_id', 'weight', 'active'];
 
     public function type(): HasOne
     {

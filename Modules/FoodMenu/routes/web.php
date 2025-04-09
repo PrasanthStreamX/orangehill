@@ -20,13 +20,17 @@ use Modules\FoodMenu\Http\Controllers\Frontend\FEfoodMenuController;
 
 Route::prefix('admin/foodmenu')->middleware(['auth:sanctum', 'is_admin'])->group(function() {
     Route::resource('item', FoodMenuItemController::class)->names('foodmenu.item');
+    Route::controller(FoodMenuItemController::class)->group(function(){
+        Route::post('/search','search')->name('foodmenu.item.search');
+    });
     Route::resource('type', FoodMenuTypeController::class)->names('foodmenu.type');
     Route::resource('category', FoodMenuCategoryController::class)->names('foodmenu.category');
     Route::controller(FoodMenuController::class)->group(function(){
-        Route::get('/create', 'create');
-        Route::get('/view', 'show');
+        Route::get('/create/{id?}', 'create');
         Route::post('/store', 'store')->name('foodmenu.store');
-        Route::get('/delete/{id?}', 'destroy');
+        Route::post('/update/order', 'updateOrder')->name('foodmenu.update.order');
+        Route::get('/delete/{id?}/{type?}', 'destroy');
+        Route::get('/view', 'show');
     });
 });
 

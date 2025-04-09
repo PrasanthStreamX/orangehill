@@ -36,6 +36,7 @@ class FoodMenuTypeController extends Controller
         $input = $request->all();
 
         $validator = Validator::make($request->all(), [
+            'type' => 'required',
             'title' => 'required',
         ]);
         if ($validator->fails()) {
@@ -43,12 +44,16 @@ class FoodMenuTypeController extends Controller
         }
 
         $type = FmMenuType::create([
+            'type' => $input['type'],
             'title' => $input['title'],
             'info' => $input['info'],
             'description' => $input['description'],
             'note' => $input['note'],
+            'price_full' => isset($input['price_full']) ? $input['price_full'] : '0.00',
+            'price_half' => isset($input['price_half']) ? $input['price_half'] : '0.00',
             'weight' => isset($input['weight']) ? $input['weight'] : 0,
-            'active' => isset($input['active']) ? $input['active'] :  1,
+            'active' => isset($input['active']) ? $input['active'] : 0,
+            'in_menu' => isset($input['in_menu']) ? $input['in_menu'] : 0,
         ]);
 
         if($request->thumb){
@@ -64,7 +69,7 @@ class FoodMenuTypeController extends Controller
             'cover_photo' => $request->cover_photo ? $cover_photo : null,
         ]);
 
-        return redirect('/admin/foodmenu/type/'.$type->id)->with('success', 'New type added successfully');
+        return redirect('/admin/foodmenu/type')->with('success', 'New type added successfully');
 
     }
 
@@ -98,6 +103,7 @@ class FoodMenuTypeController extends Controller
         $type = FmMenuType::where('id',$id)->first();
         $input = $request->all();
         $validator = Validator::make($request->all(), [
+            'type' => 'required',
             'title' => 'required',
         ]);
         if ($validator->fails()) {
@@ -105,12 +111,16 @@ class FoodMenuTypeController extends Controller
         }
 
         FmMenuType::where('id', $type->id)->update([
+            'type' => $input['type'],
             'title' => $input['title'],
             'info' => $input['info'],
             'description' => $input['description'],
             'note' => $input['note'],
-            'weight' => $input['weight'],
-            'active' => isset($input['active']) ?? $type->active
+            'price_full' => isset($input['price_full']) ? $input['price_full'] : '0.00',
+            'price_half' => isset($input['price_half']) ? $input['price_half'] : '0.00',
+            'weight' => isset($input['weight']) ? $input['weight'] : 0,
+            'active' => isset($input['active']) ? $type->active : 0,
+            'in_menu' => isset($input['in_menu']) ? $input['in_menu'] : 0,
         ]);
 
         if($request->thumb){

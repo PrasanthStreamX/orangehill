@@ -7,20 +7,38 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Thumb</th>
+                    <th style="width:110px">Thumb</th>
                     <th>Title</th>
-                    <th>Weight</th>
+                    <th>Price</th>
                     <th>Active</th>
-                    <th></th>
+                    <th>Weight</th>
+                    <th style="width:100px"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($items as $item)
                     <tr>
-                        <td>@if($item->thumb)<img src="{{url('storage/images/'.$item->thumb)}}" alt="{{$item->title}}" style="width:100px">@endif</td>
-                        <td>{{$item->title}}</td>
-                        <td>{{$item->weight}}</td>
+                        <td>
+                        @if($item->thumb)
+                            <img src="{{url('storage/images/'.$item->thumb)}}" alt="{{$item->title}}" style="width:100px">
+                        @else <div style="width:100px; height:100px; background:#eee"></div> 
+                        @endif
+                        </td>
+                        <td>
+                            {{$item->title}}<br />
+                            @if(count($item->prices) > 0)
+                                (@foreach($item->prices as $key => $priceItem)@if($key >= 1) / @endif{{$priceItem->title}}@endforeach)
+                            @endif
+                        </td>
+                        <td>
+                            @if(count($item->prices) > 0)
+                                @foreach($item->prices as $key => $priceItem)@if($key >= 1) / @endif{{_price($priceItem->price)}}@endforeach
+                            @else
+                                {{_price($item->price)}}
+                            @endif
+                        </td>
                         <td>{{$item->active ? 'Yes' : 'No'}}</td>
+                        <td>{{$item->weight}}</td>
                         <td>
                             <div class="actions">
                                 <a href="/admin/foodmenu/item/{{$item->id}}"><i class="fa-solid fa-eye"></i></a>

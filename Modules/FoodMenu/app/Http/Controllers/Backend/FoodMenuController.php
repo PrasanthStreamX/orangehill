@@ -4,7 +4,9 @@ namespace Modules\FoodMenu\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Modules\FoodMenu\Models\FmMenu;
 use Modules\FoodMenu\Models\FmMenuCategory;
@@ -24,15 +26,16 @@ class FoodMenuController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request, $id = null)
     {
-        $types = FmMenuType::where('active',1)->get();
+        if(!$id){
+            return redirect()->route('foodmenu.type.index');
+        }
+        $type = FmMenuType::where('id',$id)->first();
         $categories = FmMenuCategory::where('active',1)->get();
-        $items = FmMenuItem::where('active',1)->get();
-        $menus = FmMenu::with('type','category')->get();
+        $menus = FmMenu::with('item','type','category')->orderBy('weight', 'asc')->get();
         $menuGroups = FmMenu::with('type','category')->groupBy('category_id','type_id')->get();
-        //dd($menuGroups);
-        return view('foodmenu::backend.menu.create', compact('types', 'categories', 'items', 'menus', 'menuGroups'));
+        return view('foodmenu::backend.menu.create', compact('type', 'categories', 'menus', 'menuGroups'));
     }
 
     /**
@@ -49,13 +52,20 @@ class FoodMenuController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->with('error', 'Some fields are not valid');
         }
-        FmMenu::create([
-            'type_id' => $input['type_id'],
-            'category_id' => $input['category_id'],
-            'item_id' => $input['item_id'],
-            'active' => isset($input['active']) ? $input['active'] :  1,
-        ]);
-        return redirect('/admin/foodmenu/create')->with('success', 'New menu added successfully');
+        $item_id = $input['item_id'];
+        DB::beginTransaction();
+        foreach($input['item_id'] as $item_id){
+            $item = FmMenuItem::where('id', $item_id)->with('prices')->first();
+            FmMenu::create([
+                'type_id' => $input['type_id'],
+                'category_id' => $input['category_id'],
+                'item_id' => $item->id,
+                'weight' => $item->weight,
+            ]);
+        }
+        DB::commit();
+        return redirect('/admin/foodmenu/create/'.$input['type_id'])->with('success', 'New menu added successfully');
+        
     }
 
     /**
@@ -77,17 +87,37 @@ class FoodMenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function updateOrder(Request $request)
     {
-        //
+        $input = $request->all();
+        
+        $validator = Validator::make($request->all(), [
+            'type_id' => 'required',
+            'category_id' => 'required',
+            'item_id' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->with('error', 'Some fields are not valid');
+        }
+        foreach($input['item_id'] as $key => $item){
+            FmMenu::where([
+                'type_id'=> $input['type_id'],
+                'category_id' => $input['category_id'][$key],
+                'item_id' => $item
+            ])->update([
+                'weight' => $key
+            ]);
+        }
+
+        return Response::json(['success' => true], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id,$type)
     {
         FmMenu::where('id',$id)->delete();
-        return redirect('/admin/foodmenu/create')->with('success','Menu item removed successfully');
+        return redirect('/admin/foodmenu/create/'.$type)->with('success','Menu item removed successfully');
     }
 }

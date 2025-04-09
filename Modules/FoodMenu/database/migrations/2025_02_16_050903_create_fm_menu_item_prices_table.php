@@ -11,21 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fm_menu_items', function (Blueprint $table) {
+        Schema::create('fm_menu_item_prices', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->decimal('price')->default(0);
-            $table->string('thumb')->nullable();
-            $table->string('cover_photo')->nullable();
-            $table->text('info')->nullable();
-            $table->text('description')->nullable();
-            $table->integer('weight')->default(0);
+            $table->unsignedBigInteger('item_id');
+            $table->string('title'); //Full/half/quarter, etc.
+            $table->decimal('price', 8, 2);
             $table->boolean('active')->default(1);
             $table->boolean('available')->default(1);
+            $table->boolean('weight')->default(0);
             $table->text('note')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+
+            $table->foreign('item_id')->references('id')->on('fm_menu_items'); 
         });
     }
 
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fm_menu_items');
+        Schema::dropIfExists('fm_menu_item_prices');
     }
 };

@@ -4,11 +4,13 @@ namespace Modules\FoodMenu\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Modules\FoodMenu\Models\FmMenuItem;
 use Modules\FoodMenu\Models\FmMenuCategory;
+use Modules\FoodMenu\Models\FmMenuItemPrice;
 use Modules\FoodMenu\Models\FmMenuType;
 
 class FoodMenuItemController extends Controller
@@ -18,18 +20,28 @@ class FoodMenuItemController extends Controller
      */
     public function index()
     {
-        $items = FmMenuItem::orderBy('weight','asc')->get();
+        $items = FmMenuItem::with('prices')->orderBy('weight','asc')->get();
         return view('foodmenu::backend.item.index', compact('items'));
+    }
+
+    // Ajax search item
+    public function search(Request $request)
+    {
+        $items = FmMenuItem::all();
+        if($request->keyword != ''){
+            $items = FmMenuItem::where('title','LIKE','%'.$request->keyword.'%')->get();
+        }
+        return response()->json([
+            'items' => $items
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $types = FmMenuType::where('active', 1)->get();
-        $categories = FmMenuCategory::where('active',1)->get();
-        return view('foodmenu::backend.item.create', compact('types','categories'));
+    {   
+        return view('foodmenu::backend.item.create');
     }
 
     /**
@@ -38,21 +50,26 @@ class FoodMenuItemController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'price' => 'required|numeric'
         ]);
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->with('error', 'Some fields are not valid');
+            return Redirect::back()->withInput()->withErrors($validator)->with('error', 'Some fields are not valid');
         }
 
+        DB::beginTransaction();
+        $single_price = 0;
+        if(isset($input['single_price'])){
+            $single_price = $input['single_price'];
+        }else if(count($input['multi_price']) > 0){
+            $single_price = $input['multi_price'][0];
+        }
         $item = FmMenuItem::create([
             'title' => $input['title'],
             'info' => $input['info'],
             'description' => $input['description'],
-            'price' => $input['price'],
             'note' => $input['note'],
+            'price' => $single_price,
             'weight' => isset($input['weight']) ? $input['weight'] : 0,
             'active' => isset($input['active']) ? $input['active'] :  1,
         ]);
@@ -69,6 +86,23 @@ class FoodMenuItemController extends Controller
             'cover_photo' => $request->cover_photo ? $cover_photo : null,
         ]);
 
+        //Adding Prices
+        if(count($input['multi_price']) > 0){
+            $prises = $input['multi_price'];
+            $labels = $input['price_label'];
+            foreach($prises as $key => $value){
+                if($value !== null && $labels[$key] !== null){
+                    $prices_array = [
+                        'item_id' => $item->id,
+                        'title' => $labels[$key],
+                        'price' => $value,
+                        'weight' => $key
+                    ];
+                    FmMenuItemPrice::create($prices_array);
+                }
+            }
+        }
+        DB::commit();
         return redirect('/admin/foodmenu/item/'.$item->id)->with('success', 'New menu added successfully');
     }
 
@@ -77,7 +111,7 @@ class FoodMenuItemController extends Controller
      */
     public function show($id)
     {
-        $item = FmMenuItem::where('id',$id)->first();
+        $item = FmMenuItem::with('prices')->where('id',$id)->first();
         if(!$item){
             return redirect('/admin/foodmenu/item')->with('error', 'The requested item does not found.');
         }
@@ -89,7 +123,7 @@ class FoodMenuItemController extends Controller
      */
     public function edit($id)
     {
-        $item = FmMenuItem::where('id',$id)->first();
+        $item = FmMenuItem::with('prices')->where('id',$id)->first();
         return view('foodmenu::backend.item.edit', compact('item'));
     }
 
@@ -102,17 +136,22 @@ class FoodMenuItemController extends Controller
         $input = $request->all();
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'price' => 'required|numeric'
         ]);
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->with('error', 'Some fields are not valid');
+            return Redirect::back()->withInput()->withErrors($validator)->with('error', 'Some fields are not valid');
         }
-
+        DB::beginTransaction();
+        $single_price = 0;
+        if(isset($input['single_price'])){
+            $single_price = $input['single_price'];
+        }else if($input['multi_price']){
+            $single_price = $input['multi_price'][0];
+        }
         FmMenuItem::where('id', $item->id)->update([
             'title' => $input['title'],
             'info' => $input['info'],
             'description' => $input['description'],
-            'price' => $input['price'],
+            'price' => $single_price,
             'note' => $input['note'],
             'weight' => $input['weight'],
             'active' => isset($input['active']) ?? $item->active
@@ -140,6 +179,27 @@ class FoodMenuItemController extends Controller
                 'cover_photo' => $cover_photo,
             ]);
         }
+        //Remove existing prices
+        FmMenuItemPrice::where('item_id', $item->id)->delete();
+
+        //Adding updated Prices
+        if(count($input['multi_price']) > 0){
+            $prises = $input['multi_price'];
+            $labels = $input['price_label'];
+            foreach($prises as $key => $value){
+                if($value !== null && $labels[$key] !== null){
+                    $prices_array = [
+                        'item_id' => $item->id,
+                        'title' => $labels[$key],
+                        'price' => $value,
+                        'weight' => $key
+                    ];
+                    FmMenuItemPrice::create($prices_array);
+                }
+            }
+        }
+
+        DB::commit();
         return redirect('/admin/foodmenu/item/'.$item->id)->with('success', 'Menu updated successfully');
 
     }

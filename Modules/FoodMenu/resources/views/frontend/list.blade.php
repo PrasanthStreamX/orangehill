@@ -13,7 +13,7 @@
         <div class="tab-content" id="myTabContent">
             @foreach ($types as $i => $type)
             <div class="tab-pane fade show @if($i==0) active @endif" id="{{$type->slug}}" role="tabpanel" aria-labelledby="{{$type->slug}}-tab">
-                <div class="menu-list-wrapper list">
+                <div class="menu-list-wrapper list list_{{$type->type}}">
                     @foreach ($menuGroups as $group)
                     @if($group->type->id == $type->id)
                     <div class="list-section">
