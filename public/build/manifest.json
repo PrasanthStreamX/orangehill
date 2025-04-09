@@ -1,0 +1,70 @@
+{
+  "Modules/FoodMenu/resources/assets/sass/backend/foodmenu.scss": {
+    "file": "assets/foodmenu-Iy_B_PkD.css",
+    "src": "Modules/FoodMenu/resources/assets/sass/backend/foodmenu.scss",
+    "isEntry": true
+  },
+  "Modules/FoodMenu/resources/assets/sass/frontend/menu.scss": {
+    "file": "assets/menu-BshatMhV.css",
+    "src": "Modules/FoodMenu/resources/assets/sass/frontend/menu.scss",
+    "isEntry": true
+  },
+  "resources/assets/vendor/libs/bootstrap/css/bootstrap.min.css": {
+    "file": "assets/bootstrap-B0bZIBd4.css",
+    "src": "resources/assets/vendor/libs/bootstrap/css/bootstrap.min.css",
+    "isEntry": true
+  },
+  "resources/assets/vendor/libs/bootstrap/js/bootstrap.bundle.min.js": {
+    "file": "assets/bootstrap.bundle.min-C9czbV9R.js",
+    "name": "bootstrap.bundle.min",
+    "src": "resources/assets/vendor/libs/bootstrap/js/bootstrap.bundle.min.js",
+    "isEntry": true
+  },
+  "resources/assets/vendor/libs/jquery/jquery.js": {
+    "file": "assets/jquery-B5ZEcMqV.js",
+    "name": "jquery",
+    "src": "resources/assets/vendor/libs/jquery/jquery.js",
+    "isEntry": true
+  },
+  "resources/css/simple-lightbox.min.css": {
+    "file": "assets/simple-lightbox-Ei4RHWTz.css",
+    "src": "resources/css/simple-lightbox.min.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-K21Oc_EE.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/main.js": {
+    "file": "assets/main-CIQnvWaE.js",
+    "name": "main",
+    "src": "resources/js/main.js",
+    "isEntry": true
+  },
+  "resources/js/simple-lightbox.jquery.min.js": {
+    "file": "assets/simple-lightbox.jquery.min-C_UPBsdf.js",
+    "name": "simple-lightbox.jquery.min",
+    "src": "resources/js/simple-lightbox.jquery.min.js",
+    "isEntry": true
+  },
+  "resources/sass/backend/main.scss": {
+    "file": "assets/main-lS1MHqVg.css",
+    "src": "resources/sass/backend/main.scss",
+    "isEntry": true
+  },
+  "resources/sass/frontend/common.scss": {
+    "file": "assets/common-Br91mgus.css",
+    "src": "resources/sass/frontend/common.scss",
+    "isEntry": true
+  },
+  "storage/app/public/images/bg-11.jpg": {
+    "file": "assets/bg-11-DXByFZEf.jpg",
+    "src": "storage/app/public/images/bg-11.jpg"
+  },
+  "storage/app/public/images/bg-retro.jpg": {
+    "file": "assets/bg-retro-B18GYEfj.jpg",
+    "src": "storage/app/public/images/bg-retro.jpg"
+  }
+}
