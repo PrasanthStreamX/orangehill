@@ -49,6 +49,12 @@
     "src": "resources/js/simple-lightbox.jquery.min.js",
     "isEntry": true
   },
+  "resources/js/sortable.min.js": {
+    "file": "assets/sortable.min-DmcB_MNx.js",
+    "name": "sortable.min",
+    "src": "resources/js/sortable.min.js",
+    "isEntry": true
+  },
   "resources/sass/backend/main.scss": {
     "file": "assets/main-lS1MHqVg.css",
     "src": "resources/sass/backend/main.scss",
