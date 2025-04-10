@@ -19,7 +19,6 @@
             @yield('content')       
         </main> 
         @include('layouts.frontend.sections.footer.footer')
-        {{env('APP_NAME')}} TEST
     </div>
     @include('layouts.frontend.sections.scripts')
 </body>
