@@ -1,4 +1,6 @@
 {
     "FoodMenu": true,
-    "PhotoGallery": true
+    "PhotoGallery": true,
+    "Event": true,
+    "Events": true
 }

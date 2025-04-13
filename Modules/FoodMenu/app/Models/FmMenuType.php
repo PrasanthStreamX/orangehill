@@ -4,6 +4,7 @@ namespace Modules\FoodMenu\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class FmMenuType extends Model
 {
@@ -21,5 +22,9 @@ class FmMenuType extends Model
             ]
         ];
     }
- 
+    
+    public function related_model(): HasMany
+    {
+        return $this->hasMany(FmMenuTypeHasModel::class, 'id','type_id');
+    }
 }

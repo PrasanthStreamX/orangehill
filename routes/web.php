@@ -27,12 +27,21 @@ Route::get('/linkstorage', function () {
     return "Storage is linked";
 });
 
+
+
 // Frontend routes
 Route::get('/', [HomeController::class, 'index']);
 
 // Backend (Admin) routes
 Route::group(['middleware' => ['auth']], function() {
     Route::prefix('/admin')->group(function() {
+        
+        Route::get('/migrate', function(){
+            Artisan::call('migrate');
+            return 'New DB migrated';
+        });
+
+
         Route::controller(DashboardController::class)->group(function(){
             Route::get('/' , 'index');
             Route::get('/dashboard' , 'index');

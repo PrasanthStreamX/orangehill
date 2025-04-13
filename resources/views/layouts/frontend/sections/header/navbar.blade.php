@@ -22,7 +22,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('events') ? 'active' : '' }}" aria-current="page" href="#">Events</a>
+                <a class="nav-link {{ request()->is('events') ? 'active' : '' }}" aria-current="page" href="/events">Events</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('gift-card') ? 'active' : '' }}" aria-current="page" href="#">Gift Card</a>

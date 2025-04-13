@@ -5,7 +5,7 @@ use Modules\FoodMenu\Http\Controllers\Backend\FoodMenuItemController;
 use Modules\FoodMenu\Http\Controllers\Backend\FoodMenuCategoryController;
 use Modules\FoodMenu\Http\Controllers\Backend\FoodMenuController;
 use Modules\FoodMenu\Http\Controllers\Backend\FoodMenuTypeController;
-use Modules\FoodMenu\Http\Controllers\Frontend\FEfoodMenuController;
+use Modules\FoodMenu\Http\Controllers\Frontend\FoodMenuFrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +36,8 @@ Route::prefix('admin/foodmenu')->middleware(['auth:sanctum', 'is_admin'])->group
 
 
 // Frontend 
-Route::get('/menu', [FEfoodMenuController::class, 'index']);
+Route::controller(FoodMenuFrontendController::class)->group(function(){
+    Route::get('/menu', 'index');
+    Route::get('/menu/{id?}', 'show');
+    Route::get('/menu/model/{id?}', 'showModelMenu');
+});

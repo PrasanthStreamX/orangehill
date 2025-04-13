@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Modules\FoodMenu\Models\FmMenu;
 use Modules\FoodMenu\Models\FmMenuCategory;
 use Modules\FoodMenu\Models\FmMenuType;
+use Modules\FoodMenu\Models\FmMenuTypeHasModel;
 
-class FEfoodMenuController extends Controller
+class FoodMenuFrontendController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +22,7 @@ class FEfoodMenuController extends Controller
         $categories = FmMenuCategory::where('active',1)->get();
         $menus = FmMenu::with('item','type','category')->orderBy('weight', 'asc')->get();
         $menuGroups = FmMenu::with('type','category')->groupBy('category_id','type_id')->get();
-        return view('foodmenu::frontend.list',compact('pageFace','types', 'categories' ,'menus','menuGroups'));
+        return view('foodmenu::frontend.index',compact('pageFace','types', 'categories' ,'menus','menuGroups'));
     }
 
     /**
@@ -45,7 +46,22 @@ class FEfoodMenuController extends Controller
      */
     public function show($id)
     {
-        return view('foodmenu::show');
+        $type = FmMenuType::where('id',$id)->first();
+        $pageFace = [
+            'page_title' => $type->title
+        ];
+        $menus = FmMenu::where('type_id',$id)->with('item','type','category')->orderBy('weight', 'asc')->get();
+        $menuGroups = FmMenu::where('type_id',$id)->with('category')->groupBy('category_id')->get();
+        return view('foodmenu::frontend.show', compact('menus', 'menuGroups','pageFace'));
+    }
+
+    /**
+     * Show the specified resource with model id.
+     */
+    public function showModelMenu($id)
+    {
+        $model = FmMenuTypeHasModel::where('id',$id)->with('type')->first();
+        return $this->show($model->type->id);
     }
 
     /**

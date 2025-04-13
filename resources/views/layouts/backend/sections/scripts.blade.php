@@ -2,6 +2,7 @@
     'resources/assets/vendor/libs/jquery/jquery.js',
     'resources/assets/vendor/libs/bootstrap/js/bootstrap.bundle.min.js',
     'resources/js/sortable.min.js',
-    'resources/js/app.js'
+    'resources/js/app.js',
+    'resources/js/main.js'
 ])
 @yield('page-script')

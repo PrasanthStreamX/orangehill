@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Modules\FoodMenu\Models\FmMenuType;
+use Modules\FoodMenu\Models\FmMenuTypeHasModel;
 
 class FoodMenuTypeController extends Controller
 {
@@ -46,9 +47,9 @@ class FoodMenuTypeController extends Controller
         $type = FmMenuType::create([
             'type' => $input['type'],
             'title' => $input['title'],
-            'info' => $input['info'],
-            'description' => $input['description'],
-            'note' => $input['note'],
+            'info' => isset($input['info']) ? $input['info'] : null,
+            'description' => isset($input['description']) ? $input['description'] : null,
+            'note' => isset($input['note']) ? $input['note'] : null,
             'price_full' => isset($input['price_full']) ? $input['price_full'] : '0.00',
             'price_half' => isset($input['price_half']) ? $input['price_half'] : '0.00',
             'weight' => isset($input['weight']) ? $input['weight'] : 0,
@@ -57,8 +58,12 @@ class FoodMenuTypeController extends Controller
         ]);
 
         if($request->thumb){
-            $thumb = 'fm_type_thumb_'.$type->id.'_'.time().'.'.$request->thumb->extension(); 
-            $request->thumb->storeAs('/images', $thumb, ['disk' => 'public']);
+            if($request->hasFile('thumb')){
+                $thumb = 'fm_type_thumb_'.$type->id.'_'.time().'.'.$request->thumb->extension(); 
+                $request->thumb->storeAs('/images', $thumb, ['disk' => 'public']);
+            }else{
+                $thumb = $input['thumb'];
+            }
         }
         if($request->cover_photo){
             $cover_photo = 'fm_type_cover_'.$type->id.'_'.time().'.'.$request->cover_photo->extension(); 
@@ -69,7 +74,16 @@ class FoodMenuTypeController extends Controller
             'cover_photo' => $request->cover_photo ? $cover_photo : null,
         ]);
 
-        return redirect('/admin/foodmenu/type')->with('success', 'New type added successfully');
+        if(isset($input['model_type'])){
+            FmMenuTypeHasModel::create([
+                'type_id' => $type->id,
+                'model_type' => $input['model_type'],
+                'label' => $input['model_label'],
+                'model_id' => $input['model_id']
+            ]);
+        }
+
+        return redirect('/admin/foodmenu/create/'.$type->id)->with('success', 'New menu added successfully');
 
     }
 

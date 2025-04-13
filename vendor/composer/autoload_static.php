@@ -127,6 +127,10 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
             'Modules\\FoodMenu\\Database\\Seeders\\' => 34,
             'Modules\\FoodMenu\\Database\\Factories\\' => 36,
             'Modules\\FoodMenu\\' => 17,
+            'Modules\\Events\\Tests\\' => 21,
+            'Modules\\Events\\Database\\Seeders\\' => 32,
+            'Modules\\Events\\Database\\Factories\\' => 34,
+            'Modules\\Events\\' => 15,
             'Modules\\' => 8,
             'Mockery\\' => 8,
         ),
@@ -439,6 +443,22 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         array (
             0 => __DIR__ . '/../..' . '/Modules/FoodMenu/app',
         ),
+        'Modules\\Events\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Events/tests',
+        ),
+        'Modules\\Events\\Database\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Events/database/seeders',
+        ),
+        'Modules\\Events\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Events/database/factories',
+        ),
+        'Modules\\Events\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Events/app',
+        ),
         'Modules\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/Modules',
@@ -626,8 +646,10 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'App\\Http\\Controllers\\Frontend\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/HomeController.php',
         'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
         'App\\Models\\FeaturedLink' => __DIR__ . '/../..' . '/app/Models/FeaturedLink.php',
+        'App\\Models\\Menu' => __DIR__ . '/../..' . '/app/Models/Menu.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
+        'App\\Providers\\MenuServiceProvider' => __DIR__ . '/../..' . '/app/Providers/MenuServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
@@ -3641,6 +3663,11 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'Mockery\\Undefined' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Undefined.php',
         'Mockery\\VerificationDirector' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationDirector.php',
         'Mockery\\VerificationExpectation' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
+        'Modules\\Events\\Database\\Seeders\\EventsDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Events/database/seeders/EventsDatabaseSeeder.php',
+        'Modules\\Events\\Http\\Controllers\\EventsController' => __DIR__ . '/../..' . '/Modules/Events/app/Http/Controllers/EventsController.php',
+        'Modules\\Events\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Events/app/Providers/EventServiceProvider.php',
+        'Modules\\Events\\Providers\\EventsServiceProvider' => __DIR__ . '/../..' . '/Modules/Events/app/Providers/EventsServiceProvider.php',
+        'Modules\\Events\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Events/app/Providers/RouteServiceProvider.php',
         'Modules\\FoodMenu\\Database\\Seeders\\FoodMenuDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/FoodMenu/database/seeders/FoodMenuDatabaseSeeder.php',
         'Modules\\FoodMenu\\Http\\Controllers\\Backend\\FoodMenuCategoryController' => __DIR__ . '/../..' . '/Modules/FoodMenu/app/Http/Controllers/Backend/FoodMenuCategoryController.php',
         'Modules\\FoodMenu\\Http\\Controllers\\Backend\\FoodMenuController' => __DIR__ . '/../..' . '/Modules/FoodMenu/app/Http/Controllers/Backend/FoodMenuController.php',
