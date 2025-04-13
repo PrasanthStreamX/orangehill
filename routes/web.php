@@ -18,7 +18,6 @@ Route::get('/cache-clear', function() {
 });
 
 Route::get('/routecache', function() {
-    Artisan::call('route:cache');
     Artisan::call('route:clear');
     return "config is cleared";
 });
