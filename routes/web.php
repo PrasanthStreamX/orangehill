@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth']], function() {
         });
 
         Route::get('/module-migrate/{module}' , function($module){
-            Artisan::call('module:'.$module.'-migrate');
+            Artisan::call('module:'.$module.':migrate');
             return $module.' Migrated';
         });
 
