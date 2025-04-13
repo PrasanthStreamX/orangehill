@@ -12,6 +12,8 @@ export default defineConfig({
                 'resources/sass/frontend/common.scss',
                 'Modules/FoodMenu/resources/assets/sass/backend/foodmenu.scss',
                 'Modules/FoodMenu/resources/assets/sass/frontend/menu.scss',
+                'Modules/Events/resources/assets/sass/backend/app.scss',
+                'Modules/Events/resources/assets/sass/frontend/app.scss',
                 'resources/js/app.js',      
                 'resources/assets/vendor/libs/jquery/jquery.js',
                 'resources/assets/vendor/libs/bootstrap/js/bootstrap.bundle.min.js',

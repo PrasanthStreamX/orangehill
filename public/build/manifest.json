@@ -1,4 +1,16 @@
 {
+  "Modules/Events/resources/assets/sass/backend/app.scss": {
+    "file": "assets/app-l0sNRNKZ.js",
+    "name": "app",
+    "src": "Modules/Events/resources/assets/sass/backend/app.scss",
+    "isEntry": true
+  },
+  "Modules/Events/resources/assets/sass/frontend/app.scss": {
+    "file": "assets/app-DP2rzg_V.js",
+    "name": "app",
+    "src": "Modules/Events/resources/assets/sass/frontend/app.scss",
+    "isEntry": true
+  },
   "Modules/FoodMenu/resources/assets/sass/backend/foodmenu.scss": {
     "file": "assets/foodmenu-Iy_B_PkD.css",
     "src": "Modules/FoodMenu/resources/assets/sass/backend/foodmenu.scss",

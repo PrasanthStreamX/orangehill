@@ -15,7 +15,8 @@ export default defineConfig({
             publicDirectory: '../../public',
             buildDirectory: 'build-events',
             input: [
-                __dirname + '/resources/assets/sass/app.scss',
+                __dirname + '/resources/assets/sass/backend/app.scss',
+                __dirname + '/resources/assets/sass/frontend/app.scss',
                 __dirname + '/resources/assets/js/app.js'
             ],
             refresh: true,
