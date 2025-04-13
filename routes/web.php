@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function() {
             return 'New DB migrated';
         });
 
-        Route::get('/module-migrate/{module?}' , function(){
+        Route::get('/module-migrate/{module}' , function($module){
             return $module;
         });
 
