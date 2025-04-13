@@ -41,6 +41,10 @@ Route::group(['middleware' => ['auth']], function() {
             return 'New DB migrated';
         });
 
+        Route::get('/module-migrate/{module?}' , function(){
+            return $module;
+        });
+
 
         Route::controller(DashboardController::class)->group(function(){
             Route::get('/' , 'index');
