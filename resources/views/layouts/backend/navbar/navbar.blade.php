@@ -6,6 +6,12 @@
                 <div data-i18n="Dashboard">Dashboard</div>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/featured-links">
+                <i class="menu-icon tf-icons fa-regular fa-bell"></i>
+                <div data-i18n="Dashboard">Featured Links</div>
+            </a>
+        </li>
         @foreach (app('menu')->getItems() as $item)
             <li class="nav-item @if (request()->url() == url($item['link'])) active @endif">
                 <a href="{{ url($item['link']) }}"
