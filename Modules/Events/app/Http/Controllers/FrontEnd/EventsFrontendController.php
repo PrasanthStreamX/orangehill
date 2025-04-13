@@ -13,8 +13,11 @@ class EventsFrontendController extends Controller
      */
     public function index()
     {
+        $pageFace = [
+            'page_title' => 'Upcoming Events'
+        ];
         $events = EvntEvent::whereDate('end_date', '>=', today())->where('active',1)->orderBy('start_date', 'asc')->get();
-        return view('events::frontend.index', compact('events'));
+        return view('events::frontend.index', compact('events','pageFace'));
     }
 
     /**
