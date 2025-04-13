@@ -42,11 +42,6 @@ Route::group(['middleware' => ['auth']], function() {
             return 'New DB migrated';
         });
 
-        Route::get('/module-migrate/{module}' , function($module){
-            Artisan::call('module:'.$module.':migrate');
-            return $module.' Migrated';
-        });
-
 
         Route::controller(DashboardController::class)->group(function(){
             Route::get('/' , 'index');
