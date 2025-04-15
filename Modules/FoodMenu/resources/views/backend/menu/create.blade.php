@@ -84,6 +84,7 @@
     </div>
 @endsection
 @section('page-script')
+<script type="module" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="module">
         
         $('#search').on('keyup', function(){
