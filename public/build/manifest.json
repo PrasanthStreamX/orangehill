@@ -21,7 +21,7 @@
     "isEntry": true
   },
   "resources/assets/vendor/libs/bootstrap/css/bootstrap.min.css": {
-    "file": "assets/bootstrap-B0bZIBd4.css",
+    "file": "assets/bootstrap-gPGR8ziM.css",
     "src": "resources/assets/vendor/libs/bootstrap/css/bootstrap.min.css",
     "isEntry": true
   },
@@ -43,13 +43,13 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-K21Oc_EE.js",
+    "file": "assets/app-JvAJiq4b.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/js/main.js": {
-    "file": "assets/main-IJHd-p1-.js",
+    "file": "assets/main-DHjLujav.js",
     "name": "main",
     "src": "resources/js/main.js",
     "isEntry": true
