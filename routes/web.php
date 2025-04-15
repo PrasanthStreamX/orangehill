@@ -21,12 +21,16 @@ Route::get('/config-clear', function() {
     return "Cache is cleared";
 });
 
-Route::get('/routecache', function() {
+Route::get('/route-cache', function() {
     Artisan::call('route:clear');
     return "Route cache is cleared";
 });
+Route::get('/view-clear', function() {
+    Artisan::call('view:clear');
+    return "View cache is cleared";
+});
 
-Route::get('/linkstorage', function () {
+Route::get('/link-storage', function () {
     Artisan::call('storage:link') ;
     return "Storage is linked";
 });
