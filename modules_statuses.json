@@ -2,5 +2,6 @@
     "FoodMenu": true,
     "PhotoGallery": true,
     "Event": true,
-    "Events": true
+    "Events": true,
+    "GiftCard": true
 }

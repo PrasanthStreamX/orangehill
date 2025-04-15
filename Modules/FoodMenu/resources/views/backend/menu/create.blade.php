@@ -85,6 +85,7 @@
 @endsection
 @section('page-script')
     <script type="module">
+        
         $('#search').on('keyup', function(){
             search();
         });

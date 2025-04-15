@@ -123,6 +123,10 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
             'Modules\\PhotoGallery\\Database\\Seeders\\' => 38,
             'Modules\\PhotoGallery\\Database\\Factories\\' => 40,
             'Modules\\PhotoGallery\\' => 21,
+            'Modules\\GiftCard\\Tests\\' => 23,
+            'Modules\\GiftCard\\Database\\Seeders\\' => 34,
+            'Modules\\GiftCard\\Database\\Factories\\' => 36,
+            'Modules\\GiftCard\\' => 17,
             'Modules\\FoodMenu\\Tests\\' => 23,
             'Modules\\FoodMenu\\Database\\Seeders\\' => 34,
             'Modules\\FoodMenu\\Database\\Factories\\' => 36,
@@ -426,6 +430,22 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'Modules\\PhotoGallery\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Modules/PhotoGallery/app',
+        ),
+        'Modules\\GiftCard\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/GiftCard/tests',
+        ),
+        'Modules\\GiftCard\\Database\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/GiftCard/database/seeders',
+        ),
+        'Modules\\GiftCard\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/GiftCard/database/factories',
+        ),
+        'Modules\\GiftCard\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/GiftCard/app',
         ),
         'Modules\\FoodMenu\\Tests\\' => 
         array (
@@ -3691,6 +3711,11 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'Modules\\FoodMenu\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/FoodMenu/app/Providers/EventServiceProvider.php',
         'Modules\\FoodMenu\\Providers\\FoodMenuServiceProvider' => __DIR__ . '/../..' . '/Modules/FoodMenu/app/Providers/FoodMenuServiceProvider.php',
         'Modules\\FoodMenu\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/FoodMenu/app/Providers/RouteServiceProvider.php',
+        'Modules\\GiftCard\\Database\\Seeders\\GiftCardDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/GiftCard/database/seeders/GiftCardDatabaseSeeder.php',
+        'Modules\\GiftCard\\Http\\Controllers\\GiftCardController' => __DIR__ . '/../..' . '/Modules/GiftCard/app/Http/Controllers/GiftCardController.php',
+        'Modules\\GiftCard\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/GiftCard/app/Providers/EventServiceProvider.php',
+        'Modules\\GiftCard\\Providers\\GiftCardServiceProvider' => __DIR__ . '/../..' . '/Modules/GiftCard/app/Providers/GiftCardServiceProvider.php',
+        'Modules\\GiftCard\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/GiftCard/app/Providers/RouteServiceProvider.php',
         'Modules\\PhotoGallery\\Database\\Seeders\\GallerySeeder' => __DIR__ . '/../..' . '/Modules/PhotoGallery/database/seeders/GallerySeeder.php',
         'Modules\\PhotoGallery\\Database\\Seeders\\PhotoGalleryDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/PhotoGallery/database/seeders/PhotoGalleryDatabaseSeeder.php',
         'Modules\\PhotoGallery\\Http\\Controllers\\Backend\\GalleryController' => __DIR__ . '/../..' . '/Modules/PhotoGallery/app/Http/Controllers/Backend/GalleryController.php',
