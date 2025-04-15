@@ -1,7 +1,48 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import collectModuleAssetsPaths from './vite-module-loader.js';
 
+async function getConfig() {
+    const paths = [
+        'resources/assets/vendor/libs/bootstrap/css/bootstrap.min.css',
+        'resources/css/simple-lightbox.min.css',
+        'resources/sass/backend/main.scss',
+        'resources/sass/frontend/common.scss',
+        'Modules/FoodMenu/resources/assets/sass/backend/foodmenu.scss',
+        'Modules/FoodMenu/resources/assets/sass/frontend/menu.scss',
+        'Modules/Events/resources/assets/sass/backend/app.scss',
+        'Modules/Events/resources/assets/sass/frontend/app.scss',
+        'resources/js/app.js',
+        'resources/js/main.js',
+    ];
+    const allPaths = await collectModuleAssetsPaths(paths, 'Modules');
+
+    return defineConfig({
+        plugins: [
+            laravel({
+                input: allPaths,
+                refresh: true,
+            }),
+            vue({
+                template: {
+                    transformAssetUrls: {
+                        base: null,
+                        includeAbsolute: false,
+                    },
+                },
+            }),
+        ],
+        resolve: {
+            alias: {
+                vue: 'vue/dist/vue.esm-bundler.js',
+            },
+        },
+    });
+}
+
+export default getConfig();
+/*
 export default defineConfig({
     plugins: [
         laravel({
@@ -15,10 +56,10 @@ export default defineConfig({
                 'Modules/Events/resources/assets/sass/backend/app.scss',
                 'Modules/Events/resources/assets/sass/frontend/app.scss',
                 'resources/assets/vendor/libs/jquery/jquery.js',
-                'resources/js/app.js',      
                 'resources/assets/vendor/libs/bootstrap/js/bootstrap.bundle.min.js',
                 'resources/js/simple-lightbox.jquery.min.js',
                 'resources/js/sortable.min.js',
+                'resources/js/app.js',      
                 'resources/js/main.js',
             ],
             refresh: true,
@@ -38,3 +79,4 @@ export default defineConfig({
         },
     },
 });
+*/

@@ -84,13 +84,45 @@
     </div>
 @endsection
 @section('page-script')
-<script type="module" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="module">
-        
-        $('#search').on('keyup', function(){
-            search();
-        });
         search();
+        $(document).ready(function(){
+            $('#search').on('keyup', function(){
+                search();
+            });
+            $('#itemTable').on('click', 'tr', function(){
+                var ele = $(this).children().find(':checkbox');
+                console.log(ele);
+                if(ele.is(':checked')){
+                    ele.prop('checked', false);
+                    $(this).removeClass('checked');
+                } else {
+                    ele.prop('checked', true);
+                    $(this).addClass('checked');
+                }
+            })
+            var sortableArr = $('.menuItemListSortable');
+            $.each(sortableArr, function(i, el){
+                new Sortable(el, {
+                    sort: true, 
+                    onUpdate: function(evt){
+                        //evt.newIndex;
+                        //var item_id = evt.item.id.split("_").pop();
+                        //var item_weight = evt.newIndex;
+                        //console.log(evt)
+                        var form = $('#menuGroup');
+                        //form.submit();
+                        var actionUrl = '/admin/foodmenu/update/order';
+                        $.ajax({
+                            type: "POST",
+                            url: actionUrl,
+                            data: form.serialize(), 
+                        });
+                        
+                    }
+                });
+            });
+        });
         function search(){
             var keyword = $('#search').val();
             $.post('{{ route("foodmenu.item.search") }}',
@@ -124,47 +156,5 @@
             }
             $('#itemTable tbody').html(htmlView);
         }
-        $(document).ready(function(){
-            $('#itemTable').on('click', 'tr', function(){
-                var ele = $(this).children().find(':checkbox');
-                console.log(ele);
-                if(ele.is(':checked')){
-                    ele.prop('checked', false);
-                    $(this).removeClass('checked');
-                } else {
-                    ele.prop('checked', true);
-                    $(this).addClass('checked');
-                }
-            })
-        });
-
-        $('.weight-changer').change(function(){
-            /*
-            var weight = $(this).val();
-            
-            location.reload();
-            */
-        });
-        var sortableArr = $('.menuItemListSortable');
-        $.each(sortableArr, function(i, el){
-            new Sortable(el, {
-                sort: true, 
-                onUpdate: function(evt){
-                    //evt.newIndex;
-                    //var item_id = evt.item.id.split("_").pop();
-                    //var item_weight = evt.newIndex;
-                    //console.log(evt)
-                    var form = $('#menuGroup');
-                    //form.submit();
-                    var actionUrl = '/admin/foodmenu/update/order';
-                    $.ajax({
-                        type: "POST",
-                        url: actionUrl,
-                        data: form.serialize(), 
-                    });
-                    
-                }
-            });
-        });
     </script>
 @endsection

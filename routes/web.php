@@ -12,10 +12,21 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
+
+Route::get('/cache', function() {
+    Artisan::call("config:clear");
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call("optimize:clear");
+    Artisan::call('storage:link') ;
+    return "Optimized Cache and storage linked";
+});
+
 Route::get('/optimize-clear', function() {
     Artisan::call("optimize:clear");
     return "Optimize Cache is cleared";
 });
+
 Route::get('/config-clear', function() {
     Artisan::call("config:clear");
     return "Cache is cleared";
