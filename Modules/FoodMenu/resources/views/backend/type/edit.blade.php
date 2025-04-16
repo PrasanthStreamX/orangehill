@@ -109,7 +109,7 @@
                     <label for="active">Active</label>
                 </div>
                 <div class="col-sm-4 col-lg-2">
-                    <input type="checkbox" name="active" id="in_menu" class="form-check-input" value="1" @checked(old('in_menu') ?? $type->in_menu)>
+                    <input type="checkbox" name="in_menu" id="in_menu" class="form-check-input" value="1" @checked(old('in_menu') ?? $type->in_menu)>
                     <label for="in_menu">Add to Navigation Menu</label>
                 </div>
             </div>

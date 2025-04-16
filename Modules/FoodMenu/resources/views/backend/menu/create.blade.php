@@ -143,12 +143,13 @@
                 </tr>`;
             }
             for(let i = 0; i < res.items.length; i++){
+                var thumb = res.items[i].thumb ? res.items[i].thumb : 'oh-13.jpg';
                 htmlView += `
                     <tr>
                         <td>
                             <input type="checkbox" class="checkbox" name="item_id[]" value="`+res.items[i].id+`" >
                             <input type="hidden" name="weight[]" value="`+res.items[i].weight+`" >
-                            <img src="{{url('storage/images')}}/`+res.items[i].thumb+`" style="width:60px; height:60px">
+                            <img src="{{url('storage/images')}}/`+thumb+`" style="width:60px; height:60px">
                         </td>
                         <td>`+res.items[i].title+`</td>
                         <td>`+res.items[i].price+`</td>
